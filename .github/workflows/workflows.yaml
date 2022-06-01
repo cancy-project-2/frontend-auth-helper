@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 1
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: "14.x"
       - uses: actions/cache@v1
         with:
           path: node_modules
@@ -25,10 +25,10 @@ jobs:
         env:
           NODE_ENV: test
       - run: yarn build
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v0'
+      - id: "auth"
+        uses: "google-github-actions/auth@v0"
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
       - uses: google-github-actions/setup-gcloud@v0
       - run: gsutil -m rsync -c -r dist gs://cancy-website-bucket/auth-helper
       - run: gsutil -m setmeta -h "Cache-Control:public, max-age=3600" gs://cancy-website-bucket/auth-helper/**
